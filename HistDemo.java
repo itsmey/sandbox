@@ -96,7 +96,7 @@ class Hist {
     return (double)max_nelements / size;
   }
 
-  void PrintVertical() {
+  void PrintHorizontal() {
     char symbol = '|';
     int height;
     String col;
@@ -109,6 +109,22 @@ class Hist {
       System.out.format("%5d-%-5d " + col + " %d\n",
         min + i*interval, min + (i+1)*interval, columns[i]);
     }
+  }
+
+  void PrintVertical() {
+    char symbol = '|';
+    int height;
+
+    Screen scr = new Screen(size + 1, ncolumns * 4);
+
+    for (int i = 0; i < ncolumns; i++) {
+      height = (int)(columns[i] / scale);
+      scr.VerticalLine(i * 3, 0, height, symbol);
+      scr.VerticalLine(i * 3 + 1, 0, height, symbol);
+      scr.Number(i * 3, height, columns[i]);
+    }
+
+    scr.Print();
   }
 
   Hist(HistData d, int min, int max, int i) {
@@ -130,18 +146,63 @@ class Hist {
   }
 }
 
+class Screen {
+  private int height, width;
+  private char matrix[][];
+
+  void VerticalLine(int x, int y, int h, char ch) {
+    while (h > 0) {
+      matrix[y][x] = ch;
+      y++;
+      h--;
+    }
+  }
+
+  void Number(int x, int y, int n) {
+    String str = Integer.toString(n);
+
+    for (int i = 0; i < str.length(); i++) {
+      matrix[y][x + i] = str.charAt(i);
+    }
+  }
+
+  void Print() {
+    for (int i = height - 1; i >= 0; i--) {
+      for (int j = 0; j < width; j++) {
+        System.out.print(matrix[i][j]);
+      }
+      System.out.println();
+    }
+  }
+
+  Screen(int height, int width) {
+    this.height = height;
+    this.width = width;
+
+    matrix = new char[height][width];
+
+    for (int i = 0; i < width; i++)
+      for (int j = 0; j < height; j++)
+        matrix[j][i] = ' ';
+  }
+}
+
 public class HistDemo {
   public static void main(String[] args) {
     int size = 1000;
     int min = 0;
     int max = 100;
-    int interval = 10;
+    int interval = 5;
 
     HistData data = new HistData(size);
 
     data.FillRandom(min, max);
 
     Hist hist = new Hist(data, min, max, interval);
+
+    System.out.println();
+
+    hist.PrintHorizontal();
 
     System.out.println();
 
