@@ -10,7 +10,7 @@
 /* ------------------------- Definitions ---------------------------- */
 
 #define MAX_MARKS 10
-#define MAX_LEN 100
+#define MAX_LEN 20
 
 typedef struct timeline_mark {
   short year;
@@ -118,6 +118,9 @@ void tl_print(timeline_t* tl) {
 void tl_fill_intervals(timeline_t* tl, int *intervals) {
   int i, next;
 
+  for (i = 0; i < MAX_MARKS - 1; i++)
+    intervals[i] = 0;
+
   for (i = 0; i < MAX_MARKS - 1; i++) {
     if (tl->marks[i].used) {
       next = tl_next_mark(tl, i);
@@ -126,8 +129,7 @@ void tl_fill_intervals(timeline_t* tl, int *intervals) {
           (mark_get_days(tl->marks[next]) -
            mark_get_days(tl->marks[i])) / 365;
       }
-    } else
-     intervals[i] = 0;
+    }
   }
 
   intervals[MAX_MARKS - 1] = 0;
