@@ -69,6 +69,20 @@ public class MyList {
       return new MyList(n);
   }
 
+  public String nth(int pos) throws IllegalArgumentException {
+    if (pos <= 0 || pos > length())
+      throw new IllegalArgumentException("Invalid position.");
+
+    int curr_pos = 1;
+    Node n = head;
+    do {
+      if (pos == curr_pos++)
+        return n.data;
+      n = n.next;
+    } while(n != null);
+    return "";  //unreachable
+  }
+
   public void appendHead(String data) {
     if (isEmpty() == true) {
       head = new Node(data);

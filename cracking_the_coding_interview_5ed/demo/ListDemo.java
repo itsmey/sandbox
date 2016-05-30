@@ -55,6 +55,16 @@ class ListDemo {
     }
   }
 
+  private static void test_nth() {
+    try {
+      for(int i = 1; i <= l.length() + 1; i++)
+        System.out.println(i + "th element: " + l.nth(i));
+    }
+    catch (IllegalArgumentException e) {
+      System.out.println("Exception catched: " + e.getMessage());
+    }
+  }
+
   private static void test_last_remove() {
     try {
       while (true) {
@@ -72,6 +82,7 @@ class ListDemo {
     test_append();
     test_insert();
     test_head_tail();
+    test_nth();
     test_last_remove();
   }
 }
