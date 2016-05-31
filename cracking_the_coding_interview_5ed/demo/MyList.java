@@ -182,4 +182,28 @@ public class MyList {
 
     this.head = head;
   }
+
+  //// Solutions ////
+  public void removeDuplicates() throws IllegalArgumentException {
+    if (isEmpty() == true)
+      throw new IllegalArgumentException("Cannot operate with empty list.");
+
+    Node n = head;
+    while (n != null) {
+      removeDuplicates(n);
+      n = n.next;
+    }
+  }
+
+  private void removeDuplicates(Node n) {
+    Node next = n.next;
+    Node prev = n;
+    while (next != null) {
+      if (next.data == n.data) {
+        prev.next = next.next; /* remove duplicate node */
+      } else
+        prev = next;
+      next = next.next;
+    }
+  }
 }
