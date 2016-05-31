@@ -165,6 +165,30 @@ public class MyList {
     return result.toString();
   }
 
+  public boolean equals(MyList l) {
+    if (this == l)
+      return true;
+
+    Node n = head;
+    Node nl = l.head;
+
+    while (n != null || nl != null) {
+
+      if (n != null && nl != null) {
+        if (n.data == nl.data) {
+          n = n.next;
+          nl = nl.next;
+        }
+        else
+          return false;
+      }
+      else
+        return false;
+    }
+
+    return true;
+  }
+
   // empty list
   public MyList() {
     head = null;
@@ -205,5 +229,22 @@ public class MyList {
         prev = next;
       next = next.next;
     }
+  }
+
+  public MyList reverse() {
+    return reverse(new MyList());
+  }
+
+  private MyList reverse(MyList acc) {
+    if (isEmpty() == true)
+      return acc;
+
+    acc.appendHead(head());
+
+    return tail().reverse(acc);
+  }
+
+  public boolean isPalindrome() {
+    return equals(reverse());
   }
 }

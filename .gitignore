@@ -1,7 +1,1 @@
-*
-!.gitignore
-!*.c
-!*.cpp
-!*.py
-!*.java
-!*.erl
+*.class
