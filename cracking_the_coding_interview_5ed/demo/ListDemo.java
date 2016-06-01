@@ -77,6 +77,72 @@ class ListDemo {
     }
   }
 
+  private static void test_sort() {
+    String data[][] = {
+      {
+        "a",
+        "b",
+        "a",
+        "c",
+        "a",
+        "b"
+      },
+      {
+        "a",
+        "b",
+        "a",
+        "c",
+        "a",
+        "b",
+        "a"
+      },
+      {
+        "s",
+        "t",
+        "t",
+        "t"
+      },
+      {
+        "a",
+        "b",
+        "c",
+        "c",
+        "b",
+        "a"
+      },
+      {
+        "a"
+      },
+      {
+        "a",
+        "a",
+        "a",
+        "a"
+      },
+      {
+        "q",
+        "w",
+        "q",
+        "w",
+        "q",
+        "w",
+        "q",
+        "w"
+      },
+    };
+
+    for(String s[] : data) {
+      l = new MyList();
+      for(String ss : s)
+        l.appendTail(ss);
+      System.out.println("list:");
+      System.out.println(l);
+      l.sort();
+      System.out.println("sorted:");
+      System.out.println(l);
+    }
+  }
+
   public static void main(String args[]) {
     test_init();
     test_append();
@@ -84,5 +150,6 @@ class ListDemo {
     test_head_tail();
     test_nth();
     test_last_remove();
+    test_sort();
   }
 }

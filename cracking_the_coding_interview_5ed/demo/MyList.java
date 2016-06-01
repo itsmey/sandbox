@@ -165,6 +165,68 @@ public class MyList {
     return result.toString();
   }
 
+  private Node findPrev(Node n) throws IllegalArgumentException {
+    if (n == null)
+      throw new IllegalArgumentException("No node given");
+
+    if (head == n)
+      return null;
+
+    Node prev = head;
+    while (prev.next != n) {
+      prev = prev.next;
+      if (prev == null)
+        throw new IllegalArgumentException("Node is not in the list");
+    }
+
+    return prev;
+  }
+
+  private void swapNodes(Node n1, Node n2) throws IllegalArgumentException {
+    if (n1.next != n2)
+      throw new IllegalArgumentException("Not adjacent nodes");
+
+    Node prev;
+
+    try {
+      prev = findPrev(n1);
+    }
+    catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(e);
+    }
+
+    swapNodes(prev, n1, n2);
+  }
+
+  private void swapNodes(Node prev, Node n1, Node n2) {
+    if (prev == null)
+      head = n2;
+    else
+      prev.next = n2;
+
+    n1.next = n2.next;
+    n2.next = n1;
+  }
+
+  public void sort() throws IllegalArgumentException {
+    if (isEmpty() == true)
+      throw new IllegalArgumentException("Cannot remove from an empty list.");
+
+    Node n;
+    for(int i = 1; i < length(); i++) {
+      n = head;
+      while (n.next != null) {
+        if (n.data.compareTo(n.next.data) > 0) {
+          swapNodes(n, n.next);
+        }
+        else {
+          n = n.next;
+        }
+      }
+    }
+
+  }
+
   public boolean equals(MyList l) {
     if (this == l)
       return true;
