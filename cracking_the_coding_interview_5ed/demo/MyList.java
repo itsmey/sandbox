@@ -192,7 +192,7 @@ public class MyList {
       prev = findPrev(n1);
     }
     catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException(e);
+      throw new IllegalArgumentException(e.getMessage());
     }
 
     swapNodes(prev, n1, n2);
