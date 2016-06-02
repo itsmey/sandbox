@@ -198,7 +198,9 @@ public class MyList {
     swapNodes(prev, n1, n2);
   }
 
-  private void swapNodes(Node prev, Node n1, Node n2) {
+  private Node swapNodes(Node prev, Node n1, Node n2) {
+    Node new_prev = null;
+
     if (prev == null)
       head = n2;
     else
@@ -206,6 +208,8 @@ public class MyList {
 
     n1.next = n2.next;
     n2.next = n1;
+
+    return n2;
   }
 
   public void sort() throws IllegalArgumentException {
@@ -213,18 +217,20 @@ public class MyList {
       throw new IllegalArgumentException("Cannot remove from an empty list.");
 
     Node n;
+    Node prev;
     for(int i = 1; i < length(); i++) {
       n = head;
+      prev = null;
       while (n.next != null) {
         if (n.data.compareTo(n.next.data) > 0) {
-          swapNodes(n, n.next);
+          prev = swapNodes(prev, n, n.next);
         }
         else {
+          prev = n;
           n = n.next;
         }
       }
     }
-
   }
 
   public boolean equals(MyList l) {

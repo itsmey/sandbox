@@ -80,55 +80,36 @@ class ListDemo {
   private static void test_sort() {
     String data[][] = {
       {
-        "a",
-        "b",
-        "a",
-        "c",
-        "a",
-        "b"
+        "cat",
+        "bird",
+        "dog",
+        "apple",
+        "fruit",
+        "bear"
       },
       {
         "a",
-        "b",
-        "a",
-        "c",
-        "a",
-        "b",
-        "a"
       },
       {
-        "s",
-        "t",
-        "t",
-        "t"
-      },
-      {
-        "a",
-        "b",
-        "c",
+        "d",
         "c",
         "b",
         "a"
       },
       {
+        "a",
+        "a",
+        "z",
+        "z",
+        "a",
         "a"
       },
       {
         "a",
-        "a",
-        "a",
-        "a"
-      },
-      {
-        "q",
-        "w",
-        "q",
-        "w",
-        "q",
-        "w",
-        "q",
-        "w"
-      },
+        "b",
+        "c",
+        "d"
+      }
     };
 
     for(String s[] : data) {
