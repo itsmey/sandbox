@@ -262,9 +262,10 @@ public class MyList {
     head = null;
   }
 
-  // list with single node
-  public MyList(String head_data) {
-    head = new Node(head_data);
+  // this constructor also suitable for String arrays
+  public MyList(String... data) {
+    for(String s : data)
+      appendTail(s);
   }
 
   // from existing list
