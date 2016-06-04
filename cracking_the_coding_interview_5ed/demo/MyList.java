@@ -347,18 +347,19 @@ public class MyList {
     MyList greater = new MyList();
     MyList equal = new MyList();
 
-    String elem;
+    Node n = head;
 
-    for (int i = 1; i <= length(); i++) {
-      elem = nth(i);
-      int eq = elem.compareTo(value);
+    do {
+      int eq = n.data.compareTo(value);
       if (eq < 0)
-        smaller.appendTail(elem);
+        smaller.appendTail(n.data);
       else if (eq > 0)
-        greater.appendTail(elem);
+        greater.appendTail(n.data);
       else
-        equal.appendTail(elem);
-    }
+        equal.appendTail(n.data);
+
+      n = n.next;
+    } while (n != null);
 
     head = null;
 
