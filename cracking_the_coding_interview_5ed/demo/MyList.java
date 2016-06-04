@@ -316,4 +316,54 @@ public class MyList {
   public boolean isPalindrome() {
     return equals(reverse());
   }
+
+  private void append(MyList l) {
+    while (l.isEmpty() != true) {
+      appendTail(l.head());
+      l = l.tail();
+    }
+  }
+
+  private boolean find(String value) {
+    Node n = head;
+
+    while (n != null) {
+      if (n.data == value)
+        return true;
+      n = n.next;
+    }
+
+    return false;
+  }
+
+  public void pivotSort(String value) throws IllegalArgumentException {
+    if (isEmpty() == true)
+      throw new IllegalArgumentException("Cannot operate with empty list.");
+
+    if (find(value) == false)
+      throw new IllegalArgumentException("Value " + value + " is not in list");
+
+    MyList smaller = new MyList();
+    MyList greater = new MyList();
+    MyList equal = new MyList();
+
+    String elem;
+
+    for (int i = 1; i <= length(); i++) {
+      elem = nth(i);
+      int eq = elem.compareTo(value);
+      if (eq < 0)
+        smaller.appendTail(elem);
+      else if (eq > 0)
+        greater.appendTail(elem);
+      else
+        equal.appendTail(elem);
+    }
+
+    head = null;
+
+    append(smaller);
+    append(equal);
+    append(greater);
+  }
 }
