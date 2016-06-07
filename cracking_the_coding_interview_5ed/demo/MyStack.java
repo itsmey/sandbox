@@ -16,9 +16,9 @@ class Node {
 }
 
 public class MyStack {
-  int max_size;
-  int size;
-  Node head;
+  private int max_size;
+  private int size;
+  private Node head;
 
   private boolean isEmpty() {
     return size == 0;
@@ -69,7 +69,7 @@ public class MyStack {
 
   }
 
-  MyStack(int max_size) {
+  public MyStack(int max_size) {
     this.max_size = max_size;
     this.size = 0;
   }

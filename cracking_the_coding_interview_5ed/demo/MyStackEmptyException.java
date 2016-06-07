@@ -7,7 +7,7 @@ class MyStackException extends Exception {
 }
 
 public class MyStackEmptyException extends MyStackException {
-  MyStackEmptyException() {
+  public MyStackEmptyException() {
     super("Stack is empty!");
   }
 }
