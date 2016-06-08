@@ -19,7 +19,8 @@ int main()
 {
   string *str = new string("abcdefghijklmnopqrstuvwxyz");
   const int count = str->length() + 1;
-  char *cstr = (char*)str->c_str();
+  char cstr[count];
+  strcpy(cstr, str->c_str());
 
   for(int i = 0; i < count; i++) {
     cout << *str << endl;
