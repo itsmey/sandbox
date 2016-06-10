@@ -24,6 +24,10 @@ public class MyStack {
     return size == 0;
   }
 
+  public int getSize() {
+    return size;
+  }
+
   public void push(String data) throws MyStackFullException {
     if (size >= max_size)
       throw new MyStackFullException(size);
