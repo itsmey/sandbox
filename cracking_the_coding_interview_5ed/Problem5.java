@@ -14,11 +14,13 @@ abstract class AbstractSolver implements Solver {
   abstract public void printOutput();
 
   void fullCycle() {
+    System.out.println("* * * * * * * * * * * * * * *");
     System.out.println(name);
 
     System.out.println("input:");
     printInput();
 
+    System.out.println("solving...");
     solve();
 
     System.out.println("output:");
@@ -37,19 +39,29 @@ class Problem5_1 extends AbstractSolver {
   private int j;
 
   public void printInput() {
-    System.out.println("N = ");
+    System.out.print("N = ");
     Bitwise.printBits(N);
-    System.out.println("M = ");
+    System.out.print("M = ");
     Bitwise.printBits(M);
     System.out.println("i = " + i + ", j = " + j);
   }
 
   public void solve() {
-    //
+    if (j - i + 1 <  bitSize(M)) {
+      System.out.println("Can't solve. Not enough space to paste N.");
+      return;
+    }
+
+    int bit, pos_M = 0;
+    for(int k = i; k <= j; k++) {
+      bit = Bitwise.getBit(M, pos_M);
+      N = Bitwise.updateBit(N, k, bit);
+      pos_M++;
+    }
   }
 
   public void printOutput() {
-    System.out.println("N = ");
+    System.out.print("N = ");
     Bitwise.printBits(N);
   }
 
@@ -80,6 +92,6 @@ class Problem5_1 extends AbstractSolver {
 
 class Problem5 {
   public static void main(String args[]) {
-    new Problem5_1(42, 14, 15, 20);
+    new Problem5_1(54321, 12345, 4, 17);
   }
 }

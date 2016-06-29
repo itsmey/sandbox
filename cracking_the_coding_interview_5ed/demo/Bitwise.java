@@ -2,9 +2,9 @@ package demo;
 
 public class Bitwise {
 
-  public static boolean getBit(int arg, int n) {
+  public static int getBit(int arg, int n) {
     int mask = 1 << n;
-    return (arg & mask) != 0;
+    return ((arg & mask) != 0) ? 1 : 0;
   }
 
   public static int setBit(int arg, int n) {
@@ -36,7 +36,7 @@ public class Bitwise {
     int indent_counter = 0;
     for (int i = 31; i >= 0; i--) {
       indent_counter++;
-      c = getBit(number, i) ? '1' : '0';
+      c = (getBit(number, i) == 1) ? '1' : '0';
       System.out.print(c);
       if (indent_counter % 8 == 0)
         System.out.print(' ');
