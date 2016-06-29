@@ -7,6 +7,29 @@ public class Bitwise {
     return (arg & mask) != 0;
   }
 
+  public static int setBit(int arg, int n) {
+    int mask = 1 << n;
+    return arg | mask;
+  }
+
+  public static int resetBit(int arg, int n) {
+    int mask = ~(1 << n);
+    return arg & mask;
+  }
+
+  public static int updateBit(int arg, int n, int value) {
+    if (value == 0)
+      return resetBit(arg, n);
+    else
+      return setBit(arg, n);
+  }
+
+  public static int updateBitSequence(int arg, int start, int end, int value) {
+    for(int i = start; i <= end; i++)
+      arg = updateBit(arg, i, value);
+    return arg;
+  }
+
   public static void printBits(int number) {
     System.out.print("DEC " + number + " | BIN ");
     char c;
