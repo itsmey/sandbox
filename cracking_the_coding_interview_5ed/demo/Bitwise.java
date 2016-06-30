@@ -44,4 +44,16 @@ public class Bitwise {
     System.out.print('\n');
   }
 
+  public static int bitSize(int number) {
+    if  (number == 0) return 1;
+
+    int power = 1, size = 0;
+
+    while (number >= power) {
+      power *= 2;
+      size++;
+    }
+
+    return size;
+  }
 }
