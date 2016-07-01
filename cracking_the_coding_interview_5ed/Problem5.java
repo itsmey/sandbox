@@ -116,7 +116,7 @@ class Problem5_2 extends AbstractSolver {
       return;
     }
 
-    B = constructIEEE754(B, exponent, mantissa);
+    B = constructFloat(B, exponent, mantissa);
   }
 
   public void printOutput() {
@@ -133,17 +133,15 @@ class Problem5_2 extends AbstractSolver {
   }
 
   private static int getExponent(double number) {
-    int exponent = 0, power = 1;
+    int exponent = -1;
 
-    while (number <= power) {
+    while ( (number *= 2) < 1 )
       exponent--;
-      power /= 2;
-    }
 
     return exponent;
   }
 
-   static class MRes {
+  static class MRes {
     int power;
     int mantissa;
     MRes(int p, int m) {power = p; mantissa = m;}
@@ -163,20 +161,15 @@ class Problem5_2 extends AbstractSolver {
       return new MRes(1, 0);
 
     number *= 2;
-
     int digit = (number >= 1) ? 1 : 0;
-
-    number = number - (long)number;
-
+    number =  number - (long)number;
     MRes prev = getMantissa(count - 1, number);
 
-    return new MRes(prev.mantissa + prev.power * digit, prev.power * 2);
-
+    return new MRes(prev.power * 2, prev.mantissa + prev.power * digit);
   }
 
-
-  private static int constructIEEE754(int num, int exponent, int mantissa) {
-    /* construct 32-bit rebpesentation
+  private static int constructFloat(int num, int exponent, int mantissa) {
+    /* construct 32-bit representation
         31-st bit is a sign (0)
         23..30 bits is exponent + 127
         0..22 bits is mantissa without highest 1
@@ -199,6 +192,5 @@ class Problem5 {
   public static void main(String args[]) {
     new Problem5_1(54321, 12345, 4, 17);
     new Problem5_2(0.72);
-    new Problem5_2(0.116);
   }
 }
