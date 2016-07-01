@@ -195,7 +195,6 @@ class Problem5_3 extends AbstractSolver {
   public void printInput() {
     System.out.print("N = ");
     Bitwise.printBits(N);
-    System.out.println(nOnes(N));
   }
 
   public void solve() {
@@ -267,10 +266,45 @@ class Problem5_3 extends AbstractSolver {
   }
 }
 
+class Problem5_6 extends AbstractSolver {
+  private int N, swapped;
+
+  public void printInput() {
+    System.out.print("N = ");
+    Bitwise.printBits(N);
+  }
+
+  public void solve() {
+    int mask = 0;
+    for(int i = 0; i < 16; i++)
+      mask = (mask << 2) + 1;
+
+    int evens = N & mask;
+    int odds = N & (mask << 1);
+
+    swapped = (evens << 1) | (odds >> 1);
+  }
+
+  public void printOutput() {
+    System.out.println("N and swapped N");
+    Bitwise.printBits(N);
+    Bitwise.printBits(swapped);
+  }
+
+  Problem5_6(int N) {
+    super("Problem 5.6");
+
+    this.N = N;
+
+    fullCycle();
+  }
+}
+
 class Problem5 {
   public static void main(String args[]) {
     new Problem5_1(54321, 12345, 4, 17);
     new Problem5_2(0.72);
     new Problem5_3(54321);
+    new Problem5_6(987654321);
   }
 }
