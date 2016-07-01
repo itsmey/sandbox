@@ -188,9 +188,89 @@ class Problem5_2 extends AbstractSolver {
   }
 }
 
+class Problem5_3 extends AbstractSolver {
+  private int N, greater, lower;
+  private boolean is_greater = true, is_lower = true;
+
+  public void printInput() {
+    System.out.print("N = ");
+    Bitwise.printBits(N);
+    System.out.println(nOnes(N));
+  }
+
+  public void solve() {
+    if (N <= 0) {
+      System.out.println("N must be positive");
+      return;
+    }
+
+    int n = nOnes(N);
+    int max_int = ~(1 << 31);
+    int min_int = 1;
+    greater = N;
+    lower = N;
+
+    if (greater == max_int)
+      is_greater = false;
+    else {
+      while (nOnes(++greater) != n) {
+        if (greater == max_int) {
+          is_greater = false;
+          break;
+        }
+      }
+    }
+
+    if (lower == min_int)
+      is_lower = false;
+    else {
+      while (nOnes(--lower) != n) {
+        if (lower == min_int) {
+          is_lower = false;
+          break;
+        }
+      }
+    }
+
+  }
+
+  public void printOutput() {
+
+    if (is_greater == true) {
+      System.out.println("nearest greater with same number of 1s = ");
+      Bitwise.printBits(greater);
+    }
+    if (is_lower == true) {
+      System.out.println("nearest lower with same number of 1s = ");
+      Bitwise.printBits(lower);
+    }
+  }
+
+  private int nOnes(int number) {
+    int n = 0;
+
+    while (number != 0) {
+      if (number % 2 == 1)
+        n++;
+      number /= 2;
+    }
+
+    return n;
+  }
+
+  Problem5_3(int N) {
+    super("Problem 5.3");
+
+    this.N = N;
+
+    fullCycle();
+  }
+}
+
 class Problem5 {
   public static void main(String args[]) {
     new Problem5_1(54321, 12345, 4, 17);
     new Problem5_2(0.72);
+    new Problem5_3(54321);
   }
 }
