@@ -25,6 +25,22 @@ class Problem7_7 {
   private static int[] incrementArray(int[] a) {
 
     for(int i = 0; i < a.length; i++) {
+      if (a[i] == 5) {
+        for(int j = 0; j < a.length; j++) {
+          if (a[j] == 5 && j != i) {
+            for(int m = 0; m < a.length; m++) {
+              if (a[m] == 5 && m != i && m != j) {
+                a[i] = a[j] = 7;
+                a[m] = 3;
+                return a;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    for(int i = 0; i < a.length; i++) {
       if (a[i] == 3) {
         for(int j = 0; j < a.length; j++) {
           if (a[j] == 7) {
@@ -63,7 +79,7 @@ class Problem7_7 {
   }
 
   public static void main(String args[]) {
-    for (int i = 1; i < 50; i++) {
+    for (int i = 1; i < 100; i++) {
       System.out.print(i + "th : ");
       findNumber(i);
     }
